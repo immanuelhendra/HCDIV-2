@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Slideshow</title>
+    <style>
+        body {
+            font-family: Times New Roman, sans-serif;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+        }
+        .slide {
+            display: none;
+        }
+        .slide img {
+            width: 100%;
+            height: auto;
+        }
+        .info {
+            text-align: center;
+            padding: 10px;
+            background: #f4f4f4;
+        }
+        .toggle-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Slideshow</h1>
+    <div class="slideshow-container">
+        <!-- Slide 1 -->
+        <div class="slide">
+            <img src="path/to/image1.jpg" alt="Description of image 1">
+            <div class="info">
+                <div class="pros">Pros of Image 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                <div class="cons" style="display: none;">Cons of Image 1: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            </div>
+            <div class="toggle-buttons">
+                <button onclick="showPros(0)">Show Pros</button>
+                <button onclick="showCons(0)">Show Cons</button>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <img src="path/to/image2.jpg" alt="Description of image 2">
+            <div class="info">
+                <div class="pros">Pros of Image 2: Vestibulum ante ipsum primis in faucibus.</div>
+                <div class="cons" style="display: none;">Cons of Image 2: Praesent commodo cursus magna, vel scelerisque nisl.</div>
+            </div>
+            <div class="toggle-buttons">
+                <button onclick="showPros(1)">Show Pros</button>
+                <button onclick="showCons(1)">Show Cons</button>
+            </div>
+        </div>
+
+        <!-- Add more slides as needed -->
+
+        <!-- Navigation buttons -->
+        <button onclick="prevSlide()">Previous</button>
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function showPros(slideIndex) {
+            const slide = slides[slideIndex];
+            slide.querySelector('.pros').style.display = 'block';
+            slide.querySelector('.cons').style.display = 'none';
+        }
+
+        function showCons(slideIndex) {
+            const slide = slides[slideIndex];
+            slide.querySelector('.pros').style.display = 'none';
+            slide.querySelector('.cons').style.display = 'block';
+        }
+
+        // Initialize first slide
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
